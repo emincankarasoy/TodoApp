@@ -19,7 +19,7 @@
 - Docker
 - PostgreSQL
 - SignalR
-- JWTa
+- JWT
 
 And More ...
 
