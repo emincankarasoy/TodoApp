@@ -1,9 +1,8 @@
 ![](cover.jpeg)
 
 # TodoApp API
-
-![buildStatus](https://img.shields.io/github/workflow/status/emincannkarasoy/TodoApp/CSharp%20CI%20with%20NuGet?style=plastic)
-![latestVersion](https://img.shields.io/github/v/release/theapache64/compose-desktop-template)
+,
+![latestVersion](https://img.shields.io/github/v/release/emincannkarasoy/TodoApp)
 <a href="https://twitter.com/emincannkarasoy" target="_blank">
 <img alt="Twitter: emincannkarasoy" src="https://img.shields.io/twitter/follow/emincannkarasoy.svg?style=social" />
 </a>
