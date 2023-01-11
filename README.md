@@ -1,7 +1,7 @@
 ![](cover.jpeg)
 
 # TodoApp API
-,
+
 ![latestVersion](https://img.shields.io/github/v/release/emincannkarasoy/TodoApp)
 <a href="https://twitter.com/emincannkarasoy" target="_blank">
 <img alt="Twitter: emincannkarasoy" src="https://img.shields.io/twitter/follow/emincannkarasoy.svg?style=social" />
