@@ -11,15 +11,17 @@
 
 ## What's included?
 
-- Architecture (MVVM) with Android-ish structure (SingleActivity)
-- Dependency Injection (Dagger2)
-- Navigation (Decompose)
-- Launcher Icons (for all platforms)
-- A separate data module
-- Testing (both unit tests and UI tests)
-- Theme
-- Logging
-- Font (GoogleSans)
+- Clean Architecture
+- CQRS & Mediator
+- Task, User, Note, Notification Modules
+- ASP.NET 7 & C# 11
+- Redis
+- Docker
+- PostgreSQL
+- SignalR
+- JWTa
+
+And More ...
 
 Learn more [here](https://github.com/emincankarasoy/TodoApp)
 
