@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TodoApp.Persistance.Contexts;
@@ -11,9 +12,11 @@ using TodoApp.Persistance.Contexts;
 namespace TodoApp.Persistance.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230111184558_fix-many-relation")]
+    partial class fixmanyrelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace TodoApp.Persistance.Migrations
 
                     b.HasIndex("TasksId");
 
-                    b.ToTable("TaskTags", (string)null);
+                    b.ToTable("TagTask");
                 });
 
             modelBuilder.Entity("TodoApp.Domain.Entities.Category", b =>
@@ -77,7 +80,6 @@ namespace TodoApp.Persistance.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedDateTime")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Elevation")
@@ -97,7 +99,6 @@ namespace TodoApp.Persistance.Migrations
                         .HasColumnType("text");
 
                     b.Property<Guid>("OwnerUserId")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("uuid");
 
                     b.Property<string>("State")
@@ -105,7 +106,6 @@ namespace TodoApp.Persistance.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedDateTime")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -213,7 +213,6 @@ namespace TodoApp.Persistance.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDateTime")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
@@ -221,7 +220,6 @@ namespace TodoApp.Persistance.Migrations
                         .HasColumnType("text");
 
                     b.Property<Guid>("OwnerUserId")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("uuid");
 
                     b.Property<int>("Priority")
@@ -238,7 +236,6 @@ namespace TodoApp.Persistance.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedDateTime")
-                        .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -247,7 +244,7 @@ namespace TodoApp.Persistance.Migrations
 
                     b.HasIndex("OwnerUserId");
 
-                    b.ToTable("Locations", (string)null);
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("TodoApp.Domain.Entities.User", b =>
@@ -256,15 +253,9 @@ namespace TodoApp.Persistance.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreatedDateTime")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<Guid>("OwnerUserId")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -278,16 +269,11 @@ namespace TodoApp.Persistance.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("UpdatedDateTime")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OwnerUserId");
 
                     b.ToTable("Users", (string)null);
                 });
@@ -401,17 +387,6 @@ namespace TodoApp.Persistance.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-
-                    b.Navigation("OwnerUser");
-                });
-
-            modelBuilder.Entity("TodoApp.Domain.Entities.User", b =>
-                {
-                    b.HasOne("TodoApp.Domain.Entities.User", "OwnerUser")
-                        .WithMany()
-                        .HasForeignKey("OwnerUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("OwnerUser");
                 });

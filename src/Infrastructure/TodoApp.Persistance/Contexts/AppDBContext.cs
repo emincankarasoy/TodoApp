@@ -46,7 +46,6 @@ namespace TodoApp.Persistance.Contexts
             modelBuilder.Entity<Tag>(e =>
             {
                 e.ToTable(nameof(Tags)).HasKey(k => k.Id);
-                e.HasMany(f => f.Tasks).WithMany(w => w.Tags).UsingEntity<TaskTags>();
                 e.HasOne(f => f.OwnerUser).WithMany();
             });
 
@@ -54,6 +53,13 @@ namespace TodoApp.Persistance.Contexts
             {
                 e.ToTable(nameof(Locations)).HasKey(k => k.Id);
                 e.HasOne(f => f.Task).WithOne(w => w.Location).HasForeignKey<Location>(k => k.Id);
+                e.HasOne(f => f.OwnerUser).WithMany();
+            });
+
+            modelBuilder.Entity<Domain.Entities.Task>(e =>
+            {
+                e.ToTable(nameof(Locations)).HasKey(k => k.Id);
+                e.HasMany(f => f.Tags).WithMany(w => w.Tasks).UsingEntity(e => e.ToTable("TaskTags"));
                 e.HasOne(f => f.OwnerUser).WithMany();
             });
 

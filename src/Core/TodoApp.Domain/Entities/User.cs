@@ -7,10 +7,8 @@ using TodoApp.Domain.Entities.Common;
 
 namespace TodoApp.Domain.Entities
 {
-    public class User
+    public class User : BaseEntity
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public string Surname { get; set; }
