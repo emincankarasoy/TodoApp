@@ -17,8 +17,6 @@ namespace TodoApp.Domain.Entities
 
         public Guid CategoryId { get; set; }
 
-        public Guid TagId { get; set; }
-
         public Guid BaseTaskId { get; set; } = Guid.Empty;
 
         public string Title { get; set; } = string.Empty;

@@ -23,9 +23,28 @@ namespace TodoApp.Persistance.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>(e =>
+            {
+                e.ToTable(nameof(Users)).HasKey(k => k.Id);
+            });
+
             modelBuilder.Entity<Category>(e =>
             {
                 e.ToTable(nameof(Categories)).HasKey(k => k.Id);
+                e.HasOne(f => f.OwnerUser).WithMany();
+            });
+
+            modelBuilder.Entity<Tag>(e =>
+            {
+                e.ToTable(nameof(Tags)).HasKey(k => k.Id);
+                e.HasOne(f => f.OwnerUser).WithMany();
+            });
+
+            modelBuilder.Entity<Domain.Entities.Task>(e =>
+            {
+                e.ToTable(nameof(Tasks)).HasKey(k => k.Id);
+                e.HasMany(f => f.Tags).WithMany(w => w.Tasks).UsingEntity(e => e.ToTable("TaskTags"));
+                e.HasOne(f => f.Category).WithMany(w => w.Tasks);
                 e.HasOne(f => f.OwnerUser).WithMany();
             });
 
@@ -43,32 +62,12 @@ namespace TodoApp.Persistance.Contexts
                 e.HasOne(f => f.OwnerUser).WithMany();
             });
 
-            modelBuilder.Entity<Tag>(e =>
-            {
-                e.ToTable(nameof(Tags)).HasKey(k => k.Id);
-                e.HasOne(f => f.OwnerUser).WithMany();
-            });
-
             modelBuilder.Entity<Location>(e =>
             {
                 e.ToTable(nameof(Locations)).HasKey(k => k.Id);
                 e.HasOne(f => f.Task).WithOne(w => w.Location).HasForeignKey<Location>(k => k.Id);
                 e.HasOne(f => f.OwnerUser).WithMany();
             });
-
-            modelBuilder.Entity<Domain.Entities.Task>(e =>
-            {
-                e.ToTable(nameof(Locations)).HasKey(k => k.Id);
-                e.HasMany(f => f.Tags).WithMany(w => w.Tasks).UsingEntity(e => e.ToTable("TaskTags"));
-                e.HasOne(f => f.OwnerUser).WithMany();
-            });
-
-            modelBuilder.Entity<User>(e =>
-            {
-                e.ToTable(nameof(Users)).HasKey(k => k.Id);
-            });
-
-
 
             base.OnModelCreating(modelBuilder);
         }
