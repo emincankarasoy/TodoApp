@@ -38,9 +38,11 @@ namespace TodoApp.Persistance.Repositories.Common
             _context.SaveChanges();
         }
 
-        public void Delete(TEntity entity)
+        public void Delete(Guid id)
         {
-            _dbSet.Remove(entity);
+            TEntity? entity = _dbSet.FirstOrDefault(x => x.Id == id);
+            if (entity != null)
+                _dbSet.Remove(entity);
             _context.SaveChanges();
         }
 
@@ -62,9 +64,11 @@ namespace TodoApp.Persistance.Repositories.Common
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(TEntity entity)
+        public async Task DeleteAsync(Guid id)
         {
-            _dbSet.Remove(entity);
+            TEntity? entity = await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
+            if (entity != null)
+                _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
         }
     }

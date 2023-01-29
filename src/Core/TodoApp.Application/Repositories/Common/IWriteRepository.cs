@@ -15,7 +15,7 @@ namespace TodoApp.Application.Repositories.Common
 
         void Update(TEntity entity);
 
-        void Delete(TEntity entity);
+        void Delete(Guid id);
 
         Task InsertAsync(TEntity entity);
 
@@ -23,6 +23,6 @@ namespace TodoApp.Application.Repositories.Common
 
         Task UpdateAsync(TEntity entity);
 
-        Task DeleteAsync(TEntity entity);
+        Task DeleteAsync(Guid id);
     }
 }
