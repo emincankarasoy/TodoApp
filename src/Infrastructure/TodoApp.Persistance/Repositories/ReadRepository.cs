@@ -25,16 +25,16 @@ namespace TodoApp.Persistance.Repositories
 
         public TEntity? Get(Expression<Func<TEntity, bool>> predicate) => _dbSet.FirstOrDefault(predicate);
 
+        public IEnumerable<TEntity> GetList() => _dbSet.AsNoTrackingWithIdentityResolution().ToList();
+
         public IEnumerable<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, string includeProperties = "")
         {
             IQueryable<TEntity> query = _dbSet;
 
             query = this.GenerateQueryable(predicate: predicate, orderBy: orderBy, includeProperties: includeProperties);
 
-            return query.ToList();
+            return query.AsNoTrackingWithIdentityResolution().ToList();
         }
-
-        public IEnumerable<TEntity> GetList() => _dbSet.ToList();
 
         public IEnumerable<TEntity> GetList(int pageSize = 10, int pageIndex = 1, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, Expression<Func<TEntity, bool>>? predicate = null)
         {
@@ -42,14 +42,14 @@ namespace TodoApp.Persistance.Repositories
 
             query = this.GenerateQueryable(pageSize: pageSize, pageIndex: pageIndex, orderBy: orderBy, predicate: predicate);
 
-            return query.ToList();
+            return query.AsNoTrackingWithIdentityResolution().ToList();
         }
 
         public async Task<TEntity?> GetAsync(Guid id) => await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate) => await _dbSet.FirstOrDefaultAsync(predicate);
 
-        public async Task<IEnumerable<TEntity>> GetListAsync() => await _dbSet.ToListAsync();
+        public async Task<IEnumerable<TEntity>> GetListAsync() => await _dbSet.AsNoTrackingWithIdentityResolution().ToListAsync();
 
         public async Task<IEnumerable<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, string includeProperties = "")
         {
@@ -57,7 +57,7 @@ namespace TodoApp.Persistance.Repositories
 
             query = this.GenerateQueryable(predicate: predicate, orderBy: orderBy, includeProperties: includeProperties);
 
-            return await query.ToListAsync();
+            return await query.AsNoTrackingWithIdentityResolution().ToListAsync();
         }
 
         public async Task<IEnumerable<TEntity>> GetListAsync(int pageSize = 10, int pageIndex = 1, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, Expression<Func<TEntity, bool>>? predicate = null)
@@ -66,7 +66,7 @@ namespace TodoApp.Persistance.Repositories
 
             query = this.GenerateQueryable(pageSize: pageSize, pageIndex: pageIndex, orderBy: orderBy, predicate: predicate);
 
-            return await query.ToListAsync();
+            return await query.AsNoTrackingWithIdentityResolution().ToListAsync();
         }
 
         private IQueryable<TEntity> GenerateQueryable(Expression<Func<TEntity, bool>>? predicate = null,

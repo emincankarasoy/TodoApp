@@ -20,20 +20,52 @@ namespace TodoApp.Persistance.Repositories
             _dbSet = context.Set<TEntity>();
         }
 
-        public void Insert(TEntity entity) => _dbSet.Add(entity);
+        public void Insert(TEntity entity)
+        {
+            _dbSet.Add(entity);
+            _context.SaveChanges();
+        }
 
-        public void InsertRange(IEnumerable<TEntity> entity) => _dbSet.AddRange(entity);
+        public void InsertRange(IEnumerable<TEntity> entity)
+        {
+            _dbSet.AddRange(entity);
+            _context.SaveChanges();
+        }
 
-        public void Update(TEntity entity) => _dbSet.Update(entity);
+        public void Update(TEntity entity)
+        {
+            _dbSet.Update(entity);
+            _context.SaveChanges();
+        }
 
-        public void Delete(TEntity entity) => _dbSet.Remove(entity);
+        public void Delete(TEntity entity)
+        {
+            _dbSet.Remove(entity);
+            _context.SaveChanges();
+        }
 
-        public void Save() => _context.SaveChanges();
+        public async Task InsertAsync(TEntity entity)
+        {
+            await _dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
+        }
 
-        public async Task InsertAsync(TEntity entity) => await _dbSet.AddAsync(entity);
+        public async Task InsertRangeAsync(IEnumerable<TEntity> entity)
+        {
+            await _dbSet.AddRangeAsync(entity);
+            await _context.SaveChangesAsync();
+        }
 
-        public async Task InsertRangeAsync(IEnumerable<TEntity> entity) => await _dbSet.AddRangeAsync(entity);
+        public async Task UpdateAsync(TEntity entity)
+        {
+            _dbSet.Update(entity);
+            await _context.SaveChangesAsync();
+        }
 
-        public async Task SaveAsync() => await _context.SaveChangesAsync();
+        public async Task DeleteAsync(TEntity entity)
+        {
+            _dbSet.Remove(entity);
+            await _context.SaveChangesAsync();
+        }
     }
 }

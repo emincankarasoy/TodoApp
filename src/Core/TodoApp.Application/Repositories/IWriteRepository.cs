@@ -16,13 +16,13 @@ namespace TodoApp.Application.Repositories
         void Update(TEntity entity);
         
         void Delete(TEntity entity);
-        
-        void Save();
 
         Task InsertAsync(TEntity entity);
 
         Task InsertRangeAsync(IEnumerable<TEntity> entity);
 
-        Task SaveAsync();
+        Task UpdateAsync(TEntity entity);
+
+        Task DeleteAsync(TEntity entity);
     }
 }
