@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TodoApp.Domain.Entities.Common;
 
-namespace TodoApp.Application.Repositories
+namespace TodoApp.Application.Repositories.Common
 {
     public interface IWriteRepository<TEntity> where TEntity : BaseEntity
     {
@@ -14,7 +14,7 @@ namespace TodoApp.Application.Repositories
         void InsertRange(IEnumerable<TEntity> entity);
 
         void Update(TEntity entity);
-        
+
         void Delete(TEntity entity);
 
         Task InsertAsync(TEntity entity);

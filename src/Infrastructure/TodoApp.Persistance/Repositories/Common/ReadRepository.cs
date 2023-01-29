@@ -5,10 +5,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using TodoApp.Application.Repositories;
+using TodoApp.Application.Repositories.Common;
 using TodoApp.Domain.Entities.Common;
 
-namespace TodoApp.Persistance.Repositories
+namespace TodoApp.Persistance.Repositories.Common
 {
     public class ReadRepository<TEntity> : IReadRepository<TEntity> where TEntity : BaseEntity
     {

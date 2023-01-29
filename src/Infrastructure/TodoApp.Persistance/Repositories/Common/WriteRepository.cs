@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TodoApp.Application.Repositories;
+using TodoApp.Application.Repositories.Common;
 using TodoApp.Domain.Entities.Common;
 
-namespace TodoApp.Persistance.Repositories
+namespace TodoApp.Persistance.Repositories.Common
 {
     public class WriteRepository<TEntity> : IWriteRepository<TEntity> where TEntity : BaseEntity
     {
