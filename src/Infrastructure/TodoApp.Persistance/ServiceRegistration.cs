@@ -10,7 +10,7 @@ using TodoApp.Persistance.Contexts;
 
 namespace TodoApp.Persistance
 {
-    public static class ServiceRegister
+    public static class ServiceRegistration
     {
         public static void RegisterPersistanceServices(this IServiceCollection services, ConfigurationManager configuration)
         {
